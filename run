@@ -1,0 +1,20 @@
+#!/bin/bash
+
+PIDFILE=/var/run/ddns_godaddy.pid
+
+case $1 in
+   start)
+       # Launch your program as a detached process
+       python3 /bin/ddns_godaddy/ddns_godaddy_prod.py 2>/dev/null &
+       # Get its PID and store it
+       echo $! > ${PIDFILE}
+   ;;
+   stop)
+      kill `cat ${PIDFILE}`
+      # Now that it's killed, don't forget to remove the PID file
+      rm ${PIDFILE}
+   ;;
+   *)
+      echo "usage: exam-python {start|stop}" ;;
+esac
+exit 0
