@@ -33,6 +33,7 @@ while True:
     updated = UpdateIpAddress(LoginAccount(), new_ip)
     if new_ip is not current_ip:
         logging.info('ip address changed: %s -> %s'%(current_ip, new_ip))
+        current_ip = new_ip
     logging.info("Update: %s"%updated)
     time.sleep(60)
 logging.warning("Exit")
