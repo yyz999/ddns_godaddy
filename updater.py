@@ -2,15 +2,7 @@
 from godaddypy import Client, Account
 import pif
 import logging
-import os
 import time
-
-def WritePid():
-    pid = str(os.getpid())
-    pid_file = open('/bin/ddns_godaddy/ddns_godaddy.pid', 'w')
-    pid_file.write(pid)
-    pid_file.close()
-    return pid
 
 def GetIpAddress():
     return pif.get_public_ip()
@@ -34,7 +26,6 @@ def UpdateIpAddress(client, ip):
 
 # main
 logging.basicConfig(filename='/tmp/ddns_godaddy.log', format='%(asctime)s: %(levelname)s: %(message)s', level=logging.INFO)
-logging.info("Started: %s" % WritePid())
 current_ip = None
 updated = False
 while True:
