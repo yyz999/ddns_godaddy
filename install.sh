@@ -4,7 +4,7 @@
 
 sudo rm -rf /bin/ddns_godaddy
 sudo mkdir /bin/ddns_godaddy
-sudo cp updater.py /bin/ddns_godaddy/
+sudo cp updater.py /bin/ddns_godaddy/ddns_godaddy_prod.py
 sudo cp run /bin/ddns_godaddy/
 sudo chmod +x /bin/ddns_godaddy/run
 
