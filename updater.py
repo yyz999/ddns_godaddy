@@ -16,8 +16,11 @@ def UpdateIpAddress(client, ip):
     domains=client.get_domains()
     ret=True
     for domain in domains:
-        client.update_ip(ip, domains=[domain])
-        records=client.get_records(domain)
+        try:
+            client.update_ip(ip, domains=[domain])
+            records=client.get_records(domain)
+        except:
+            logging.info("Fail to update: %s"%domain)
         for record in records:
             if record['type'] is 'A':
                 if record['data'] != ip:
@@ -31,7 +34,7 @@ updated = False
 while True:
     new_ip = GetIpAddress()
     updated = UpdateIpAddress(LoginAccount(), new_ip)
-    if new_ip is not current_ip:
+    if new_ip != current_ip:
         logging.info('ip address changed: %s -> %s'%(current_ip, new_ip))
         current_ip = new_ip
     logging.info("Update: %s"%updated)
